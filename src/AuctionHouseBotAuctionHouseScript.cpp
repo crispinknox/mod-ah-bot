@@ -68,7 +68,7 @@ void AHBot_AuctionHouseScript::OnBeforeAuctionHouseMgrSendAuctionOutbiddedMail(
             std::advance(it, randBot);
 
             oldBidder->GetSession()->SendAuctionBidderNotification(
-                (uint32)auction->GetHouseId(),
+                auction->GetHouseId(),
                 auction->Id,
                 ObjectGuid::Create<HighGuid::Player>(*it),
                 newPrice,
@@ -84,16 +84,16 @@ void AHBot_AuctionHouseScript::OnAuctionAdd(AuctionHouseObject* /*ah*/, AuctionE
     // The the configuration for the auction house
     // 
 
-    AuctionHouseEntry const* ahEntry = sAuctionMgr->GetAuctionHouseEntryFromHouse(auction->GetHouseId());
+    AuctionHouseEntry const* ahEntry = sAuctionHouseStore.LookupEntry(auction->GetHouseId());
     AHBConfig*               config  = gNeutralConfig;
 
     if (ahEntry)
     {
-        if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Alliance)
+        if (ahEntry->houseId == AUCTIONHOUSE_ALLIANCE)
         {
             config = gAllianceConfig;
         }
-        else if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Horde)
+        else if (ahEntry->houseId == AUCTIONHOUSE_HORDE)
         {
             config = gHordeConfig;
         }
@@ -147,16 +147,16 @@ void AHBot_AuctionHouseScript::OnAuctionRemove(AuctionHouseObject* /*ah*/, Aucti
     // Get the configuration for the auction house
     // 
 
-    AuctionHouseEntry const* ahEntry = sAuctionMgr->GetAuctionHouseEntryFromHouse(auction->GetHouseId());
+    AuctionHouseEntry const* ahEntry = sAuctionHouseStore.LookupEntry(auction->GetHouseId());
     AHBConfig*               config  = gNeutralConfig;
 
     if (ahEntry)
     {
-        if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Alliance)
+        if (ahEntry->houseId == AUCTIONHOUSE_ALLIANCE)
         {
             config = gAllianceConfig;
         }
-        else if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Horde)
+        else if (ahEntry->houseId == AUCTIONHOUSE_HORDE)
         {
             config = gHordeConfig;
         }
@@ -210,16 +210,16 @@ void AHBot_AuctionHouseScript::OnAuctionSuccessful(AuctionHouseObject* /*ah*/, A
     // Get the configuration for the auction house
     // 
 
-    AuctionHouseEntry const* ahEntry = sAuctionMgr->GetAuctionHouseEntryFromHouse(auction->GetHouseId());
+    AuctionHouseEntry const* ahEntry = sAuctionHouseStore.LookupEntry(auction->GetHouseId());
     AHBConfig*               config  = gNeutralConfig;
 
     if (ahEntry)
     {
-        if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Alliance)
+        if (ahEntry->houseId == AUCTIONHOUSE_ALLIANCE)
         {
             config = gAllianceConfig;
         }
-        else if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Horde)
+        else if (ahEntry->houseId == AUCTIONHOUSE_HORDE)
         {
             config = gHordeConfig;
         }
@@ -239,16 +239,16 @@ void AHBot_AuctionHouseScript::OnAuctionExpire(AuctionHouseObject* /*ah*/, Aucti
     // Get the configuration for the auction house
     // 
 
-    AuctionHouseEntry const* ahEntry = sAuctionMgr->GetAuctionHouseEntryFromHouse(auction->GetHouseId());
+    AuctionHouseEntry const* ahEntry = sAuctionHouseStore.LookupEntry(auction->GetHouseId());
     AHBConfig*               config  = gNeutralConfig;
 
     if (ahEntry)
     {
-        if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Alliance)
+        if (ahEntry->houseId == AUCTIONHOUSE_ALLIANCE)
         {
             config = gAllianceConfig;
         }
-        else if (AuctionHouseId(ahEntry->houseId) == AuctionHouseId::Horde)
+        else if (ahEntry->houseId == AUCTIONHOUSE_HORDE)
         {
             config = gHordeConfig;
         }
